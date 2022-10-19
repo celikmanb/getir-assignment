@@ -1,5 +1,5 @@
 export async function getAllProduct(params) {
-    const response = await fetch(`http://localhost:3000/items?_page=${params.page}&_limit=${params.limit}`)
+    const response = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/items?_page=${params.page}&_limit=${params.limit}`)
     var result = { data: [], totalCount: response.headers.get('X-Total-Count') }
     result.data = await response.json()
     return result
@@ -24,21 +24,21 @@ export async function getFilterProducts(params) {
             manufacturerQuery += `&manufacturer=${element}`
         });
     }
-    const response = await fetch(`http://localhost:3000/items?_page=${params.page}&_limit=${params.limit}&_sort=${params.sort}&_order=${params.order}${tagsQuery}${manufacturerQuery}`)
+    const response = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/items?_page=${params.page}&_limit=${params.limit}&_sort=${params.sort}&_order=${params.order}${tagsQuery}${manufacturerQuery}`)
     var result = { data: [], totalCount: response.headers.get('X-Total-Count') }
     result.data = await response.json()
     return result
 }
 
 export async function getCompanies() {
-    const response = await fetch(`http://localhost:3000/companies`)
+    const response = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/companies`)
     var result = { data: [], totalCount: response.headers.get('X-Total-Count') }
     result.data = await response.json()
     return result
 }
 
 export async function getTags() {
-    const response = await fetch(`http://localhost:3000/items`)
+    const response = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/items`)
     var result = { data: [], totalCount: response.headers.get('X-Total-Count') }
     result.data = await response.json()
     let stringArray = []
